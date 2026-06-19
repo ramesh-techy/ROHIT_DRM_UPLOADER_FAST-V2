@@ -1220,8 +1220,16 @@ async def back_to_start_callback(client, callback_query: CallbackQuery):
             ]
         ])
     )
-    @bot.on_callback_query(filters.regex("user_cmds"))
-async def user_commands_callback(client, callback_query: CallbackQuery):
+   # ... बाकी सारे कॉलबैक हैंडलर (features, details, back_to_start) ...
+
+@bot.on_callback_query(filters.regex("back_to_start"))
+async def back_to_start_callback(client, callback_query):
+    # ... पुराना कोड ...
+
+# ⚠️ यहाँ पर (इन दोनों हैंडलर के बाद) आपको नए हैंडलर पेस्ट करने हैं:
+
+@bot.on_callback_query(filters.regex("user_cmds"))
+async def user_commands_callback(client, callback_query):
     await callback_query.answer()
     user_cmds_text = (
         "**👤 यूज़र कमांड्स (सभी को उपलब्ध)**\n\n"
@@ -1244,9 +1252,8 @@ async def user_commands_callback(client, callback_query: CallbackQuery):
     )
 
 @bot.on_callback_query(filters.regex("admin_cmds"))
-async def admin_commands_callback(client, callback_query: CallbackQuery):
+async def admin_commands_callback(client, callback_query):
     await callback_query.answer()
-    # Check if user is admin
     user_id = callback_query.from_user.id
     if not db.is_admin(user_id):
         await callback_query.message.edit_text(
@@ -1257,7 +1264,6 @@ async def admin_commands_callback(client, callback_query: CallbackQuery):
             ])
         )
         return
-    
     admin_cmds_text = (
         "**🛡️ एडमिन कमांड्स (सिर्फ एडमिन)**\n\n"
         "• `/setlog` – लॉग चैनल सेट करें\n"
