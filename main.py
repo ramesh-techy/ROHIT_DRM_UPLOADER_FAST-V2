@@ -1189,7 +1189,6 @@ async def details_callback(client, callback_query: CallbackQuery):
 @bot.on_callback_query(filters.regex("back_to_start"))
 async def back_to_start_callback(client, callback_query: CallbackQuery):
     await callback_query.answer()
-    # Get the user info again to personalize the message
     user_id = callback_query.from_user.id
     is_authorized = db.is_user_authorized(user_id, client.me.username)
     is_admin = db.is_admin(user_id)
@@ -1217,19 +1216,16 @@ async def back_to_start_callback(client, callback_query: CallbackQuery):
             [
                 InlineKeyboardButton("ғᴇᴀᴛᴜʀᴇꜱ 🪔", callback_data="features"),
                 InlineKeyboardButton("ᴅᴇᴛᴀɪʟꜱ 🦋", callback_data="details")
+            ],
+            [
+                InlineKeyboardButton("👤 User Commands", callback_data="user_cmds"),
+                InlineKeyboardButton("🛡️ Admin Commands", callback_data="admin_cmds")
             ]
         ])
     )
-   # ... बाकी सारे कॉलबैक हैंडलर (features, details, back_to_start) ...
-
-@bot.on_callback_query(filters.regex("back_to_start"))
-async def back_to_start_callback(client, callback_query):
-    # ... पुराना कोड ...
-
-# ⚠️ यहाँ पर (इन दोनों हैंडलर के बाद) आपको नए हैंडलर पेस्ट करने हैं:
 
 @bot.on_callback_query(filters.regex("user_cmds"))
-async def user_commands_callback(client, callback_query):
+async def user_commands_callback(client, callback_query: CallbackQuery):
     await callback_query.answer()
     user_cmds_text = (
         "**👤 यूज़र कमांड्स (सभी को उपलब्ध)**\n\n"
@@ -1252,7 +1248,7 @@ async def user_commands_callback(client, callback_query):
     )
 
 @bot.on_callback_query(filters.regex("admin_cmds"))
-async def admin_commands_callback(client, callback_query):
+async def admin_commands_callback(client, callback_query: CallbackQuery):
     await callback_query.answer()
     user_id = callback_query.from_user.id
     if not db.is_admin(user_id):
