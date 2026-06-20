@@ -318,10 +318,10 @@ async def start(bot: Client, m: Message):
             if not is_authorized:
                 await m.reply_photo(
                     photo=photologo,
-                    caption="**Mʏ Nᴀᴍᴇ [DRM Wɪᴢᴀʀᴅ 🦋](https://t.me/rohit46788)\n\nYᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀᴄᴄᴇꜱꜱ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ\nCᴏɴᴛᴀᴄᴛ [𝐈𝐓' Rohit.™®](https://t.me/rohit46788) ғᴏʀ ᴀᴄᴄᴇꜱꜱ**",
+                    caption="**Mʏ Nᴀᴍᴇ [DRM UPLODER 🦋](https://t.me/rohit46788)\n\nYᴏᴜ ᴅᴏɴ'ᴛ ʜᴀᴠᴇ ᴀᴄᴄᴇꜱꜱ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ʙᴏᴛ\nCᴏɴᴛᴀᴄᴛ [𝐈𝐓' Rohit.™®](https://t.me/rohit46788) ғᴏʀ ᴀᴄᴄᴇꜱꜱ**",
                     reply_markup=InlineKeyboardMarkup([
     [
-        InlineKeyboardButton("𝐈𝐓'𝐬𝐆𝐎𝐋𝐔.™®", url="https://t.me/rohit46788")
+        InlineKeyboardButton("𝐈𝐓'Rohit.™®", url="https://t.me/rohit46788")
     ],
     [
         InlineKeyboardButton("ғᴇᴀᴛᴜʀᴇꜱ 🪔", callback_data="features"),
@@ -379,7 +379,7 @@ auth_filter = filters.create(auth_check_filter)
 @bot.on_message(~auth_filter & filters.private & filters.command)
 async def unauthorized_handler(client, message: Message):
     await message.reply(
-        "<b>Mʏ Nᴀᴍᴇ [DRM Wɪᴢᴀʀᴅ 🦋](https://t.me/rohit46788)</b>\n\n"
+        "<b>Mʏ Nᴀᴍᴇ [DRM UPLODER 🦋](https://t.me/rohit46788)</b>\n\n"
         "<blockquote>You need to have an active subscription to use this bot.\n"
         "Please contact admin to get premium access.</blockquote>",
         reply_markup=InlineKeyboardMarkup([[
@@ -1168,9 +1168,9 @@ async def details_callback(client, callback_query: CallbackQuery):
     await callback_query.answer()
     details_text = (
         "**📋 Bot Details 📋**\n\n"
-        "• 🤖 Bot Name: DRM Wizard 🦋\n"
-        "• 👨‍💻 Developer: IT'sGOLU.™®\n"
-        "• 📱 Contact: @ITsGOLU_OWNER_BOT\n"
+        "• 🤖 Bot Name: DRM UPLODER 🦋\n"
+        "• 👨‍💻 Developer: IT'ROHIT.™®\n"
+        "• 📱 Contact: @rohit46788\n"
         "• 🔄 Version: 1.0\n"
         "• 📝 Language: Python\n"
         "• 🛠️ Framework: Pyrogram\n\n"
@@ -1194,42 +1194,48 @@ async def back_to_start_callback(client, callback_query: CallbackQuery):
     is_admin = db.is_admin(user_id)
     
     commands_list = (
-        "**>  /drm - ꜱᴛᴀʀᴛ ᴜᴘʟᴏᴀᴅɪɴɢ ᴄᴘ/ᴄᴡ ᴄᴏᴜʀꜱᴇꜱ**\n"
-        "**>  /plan - ᴠɪᴇᴡ ʏᴏᴜʀ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ ᴅᴇᴛᴀɪʟꜱ**\n"
+        "-  /drm - **ꜱᴛᴀʀᴛ ᴜᴘʟᴏᴀᴅɪɴɢ ᴄᴘ/ᴄᴡ ᴄᴏᴜʀꜱᴇꜱ**\n"
+        "-  /plan - **ᴠɪᴇᴡ ʏᴏᴜʀ ꜱᴜʙꜱᴄʀɪᴘᴛɪᴏɴ ᴅᴇᴛᴀɪʟꜱ**\n"
     )
     
     if is_admin:
         commands_list += (
             "\n**👑 Admin Commands**\n"
             "• /users - List all users\n"
+            "• `/setlog` – लॉग चैनल सेट करें\n"
+            "• `/getlog` – मौजूदा लॉग चैनल देखें\n"
+            "• `/add` – यूज़र ऐड करें\n"
+            "• `/remove` – यूज़र हटाएँ\n"
+            "• `/users` – सभी यूज़र्स की लिस्ट देखें\n"
         )
     
     await callback_query.message.edit_media(
         media=InputMediaPhoto(
             media=photologo,
             caption=f"**Mʏ ᴄᴏᴍᴍᴀɴᴅꜱ ғᴏʀ ʏᴏᴜ [{callback_query.from_user.first_name} ](tg://settings)**\n\n{commands_list}"
-                    f"**# DRM_UPLOADER BOT**\n\n"
-                    f"**Yo {m.from_user.first_name} 😂**\n"
-                    f"This ain't a normal bot — this is your **DOWNLOAD FAST** 🎉\n\n"
-                    f"**WHAT I DROP FOR YOU**\n"
-                    f"• Crazy-fast videos (no buffering drama)\n"
-                    f"• Clean PDFs & docs — straight to the point\n"
-                    f"• Full batch dumps via .txt\n"
-                    f"• Pick your quality + custom thumbs\n\n"
-                    f"**WHERE I COOK**\n"
-                    f"• YouTube — no cookies, no stress\n"
-                    f"• ClassPlus — DRM? handled.\n"
-                    f"• Utkarsh — vids · PDFs · .ws\n"
-                    f"• Study IQ — locked or unlocked\n"
-                    f"• Khan Sir\n"
-                    f"• APPX — direct links only\n"
-                    f"• VIDCRYPT — protected stuff cracked\n"
-                    f"• Zoom recordings\n"
-                    f"• PW DRM — encrypted content unlocked\n"
-                    f"• SHE - DWALU (VID + PDF)\n"
-                    f"• Adda247 — S3 & streaming links\n\n"
-                    f"**Built for speed freaks & power users**\n"
-                    f"• Smooth · Clean · No backdoor"
+                            f"**# DRM_UPLOADER BOT**\n\n"
+        f"**Yo {m.from_user.first_name} 😂**\n"
+        f"This ain't a normal bot — this is your **DOWNLOAD FLASH ⚡** 🎉\n\n"
+        f"**WHAT I DROP FOR YOU**\n"
+        f"• Crazy-fast videos (no buffering drama)\n"
+        f"• Clean PDFs & docs — straight to the point\n"
+        f"• Full batch dumps via .txt\n"
+        f"• Pick your quality + custom thumbs\n\n"
+        f"**WHERE I COOK**\n"
+        f"• YouTube — no cookies, no stress\n"
+        f"• ClassPlus — DRM? handled.\n"
+        f"• Utkarsh — vids · PDFs · .ws\n"
+        f"• Study IQ — locked or unlocked\n"
+        f"• Khan Sir\n"
+        f"• APPX — direct links only\n"
+        f"• VIDCRYPT — protected stuff cracked\n"
+        f"• Zoom recordings\n"
+        f"• PW DRM — encrypted content unlocked\n"
+        f"• SHE - DWALU (VID + PDF)\n"
+        f"• Adda247 — S3 & streaming links\n\n"
+        f"**Built for speed freaks & power users**\n"
+        f"• Smooth · Clean · No backdoor"
+                    
         ),
         reply_markup=InlineKeyboardMarkup([
             [
