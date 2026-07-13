@@ -200,6 +200,44 @@ class Database:
             print(f"{Fore.RED}Authorization error for {user_id}: {str(e)}{Style.RESET_ALL}")
             return False
 
+    def is_channel_authorized(self, channel_id: int, bot_username: str = "ITsGOLU_UPLOADER") -> bool:
+        """
+        Check if a channel is authorized to use the bot.
+        """
+        try:
+            # OPTION 1: Quick Hardcode (Uncomment the next two lines and add your channel ID to test instantly)
+            # if channel_id == -100XXXXXXXXX: 
+            #     return True
+
+            # OPTION 2: Database Check (Looks for the channel in a 'channels' collection)
+            channel = self.db.channels.find_one({
+                "channel_id": channel_id,
+                "bot_username": bot_username
+            })
+            return bool(channel)
+            
+        except Exception as e:
+            print(f"{Fore.RED}Channel authorization error for {channel_id}: {str(e)}{Style.RESET_ALL}")
+            return False
+
+    def authorize_channel(self, channel_id: int, bot_username: str = "ITsGOLU_UPLOADER") -> bool:
+        """
+        Add a channel to the authorized list in the database.
+        """
+        try:
+            self.db.channels.update_one(
+                {"channel_id": channel_id, "bot_username": bot_username},
+                {"$set": {
+                    "added_date": datetime.now(),
+                    "is_active": True
+                }},
+                upsert=True
+            )
+            return True
+        except Exception as e:
+            print(f"{Fore.RED}Error authorizing channel {channel_id}: {str(e)}{Style.RESET_ALL}")
+            return False
+
     def add_user(self, user_id: int, name: str, days: int, 
                 bot_username: str = "ITsGOLU_UPLOADER") -> tuple[bool, Optional[datetime]]:
         """
@@ -293,6 +331,7 @@ class Database:
         except Exception as e:
             print(f"{Fore.RED}Admin check error: {str(e)}{Style.RESET_ALL}")
             return False
+
     def get_log_channel(self, bot_username: str):
         """Get the log channel ID for a specific bot"""
         try:
